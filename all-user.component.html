@@ -1,0 +1,77 @@
+<div class="container">
+  <br/>
+  <div class="row">
+    <div class="col-sm-4" *ngFor="let item of allUser">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <span class="fa fa-user text-info"> </span> {{item.username}}
+            <span class="pull-right">
+              <span (click)="deleteUser(item.id)"><i class="fa fa-remove cursor"></i></span>
+              <span (click)="infoClick(item.username, item.age, item.sex, item.position, item.address)"><i
+                class="fa fa-pencil cursor" (click)="lgModal.show()"></i></span>
+            </span>
+          </div>
+        </div>
+        <div class="panel-body">
+          <a routerLink="{{item.id}}">
+            <p>
+              性别: <span *ngIf="item.sex=='男'" class="fa fa-male"></span>
+              <span *ngIf="item.sex=='女'" class="fa fa-female"></span>
+            </p>
+            <p>
+              年龄: {{item.age}}
+            </p>
+            <p>
+              职位: {{item.position}}
+            </p>
+            <p>
+              地址: {{item.address}}
+            </p>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <page [bigTotalItems]="total" (currentPage)="pageHandel($event)"></page>
+</div>
+
+
+<!--模板-->
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">修改用户信息</h4>
+        <button type="button" class="close pull-right" (click)="lgModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <select [(ngModel)]="sex" name="sex" class="form-control">
+            <option value="男">男</option>
+            <option vlaue="女">女</option>
+          </select>
+        </p>
+        <p>
+          <input type="text" name="age" [(ngModel)]="age" class="form-control"/>
+        </p>
+        <p>
+          <input type="text" name="position" [(ngModel)]="position" class="form-control"/>
+        </p>
+        <p>
+          <input type="text" name="address" [(ngModel)]="address" class="form-control"/>
+        </p>
+        <p class="text-right" (click)="updateUser()">
+          <span class="pull-left text-danger">{{message}}</span>
+          <button class="btn btn-info">修改</button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+

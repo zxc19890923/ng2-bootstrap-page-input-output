@@ -1,0 +1,19 @@
+<!--分页-->
+<div class="col-md-6">
+  <!--
+    参数说明:
+    1. totalItems: 总条数
+    2. maxSize: 最大显示几页, 其余显示...
+    3. (pageChanged): 分页改变的时候触发事件
+  -->
+  <pagination
+    [totalItems]="bigTotalItems"
+    [(ngModel)]="bigCurrentPage"
+    [maxSize]="maxSize"
+    class="pagination-sm"
+    [boundaryLinks]="true"
+    [rotate]="false"
+    (pageChanged)="pageChanged($event)"
+    (numPages)="numPages = $event"
+  ></pagination>
+</div>
